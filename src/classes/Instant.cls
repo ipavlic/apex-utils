@@ -1,4 +1,4 @@
-public with sharing class Instant {
+public class Instant {
 
 	private static Datetime now;
 	private static Date today;
