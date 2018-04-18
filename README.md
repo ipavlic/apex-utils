@@ -57,10 +57,10 @@ public class TemporalExample {
 }
 
 @IsTest
-public TemporalExampleTest {
+public class TemporalExampleTest {
     @IsTest
     public static void testTimestamp() {
-        String currentTimestamp = TemporalExample.timestamp(); // output is untestable
+        String timestamp = TemporalExample.timestamp(); // output is untestable
     }
     
     @IsTest
