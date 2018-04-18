@@ -3,6 +3,7 @@
 ## Classes
 
 - [`ApexString`](#apex-string)
+- [`Instant`](#instant)
 - [`Optional`](#optional)
 
 ## `ApexString`
@@ -38,6 +39,40 @@ System.assert(stringSet.contains(b)); // true
 ### Warning :warning:
 
 `System.String.join` does not use the `toString` method on objects it is joining. All `ApexString` instances are therefore stringified to `'ApexString'` before they are joined into the final string (for example `'ApexString,ApexString,ApexString'`). To join collections of `ApexString`, use `ApexString.join` instead.
+
+## `Instant`
+<a name="instant"></a>
+
+`Instant` enables mocking dates and datetimes in tests for classes with temporal logic, by providing `Datetime.now()` and `Date.today()` replacements. This is helpful when `Date` and `Datetime` injection is not possible or convenient.
+
+```java
+public class TemporalExample {
+    public static String timestamp() {
+        return Datetime.now().format('yyyy-MM-dd\'T\'HH:mm:ss'); // relies on current datetime provided by System.Datetime
+    }
+    
+    public static String testableTimestamp() {
+        return Instant.now().format('yyyy-MM-dd\'T\'HH:mm:ss'); // defaults to current datetime, but can be overriden in test
+    }
+}
+
+@IsTest
+public TemporalExampleTest {
+    @IsTest
+    public static void testTimestamp() {
+        String currentTimestamp = TemporalExample.timestamp(); // output is untestable
+    }
+    
+    @IsTest
+    public static void testTestableTimestamp() {
+        Datetime mockDatetime = Datetime.newInstance(2000, 1, 15, 10, 30, 59);
+        Instant.setNow(mockDatetime);
+        String timestamp = TemporalExample.testableTimestamp();
+        System.assertEquals(timestamp, '2000-01-15T10:30:59');
+    }
+}
+```
+
 
 ## `Optional`
 <a name="optional"></a>
