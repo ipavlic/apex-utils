@@ -50,7 +50,7 @@ public class TemporalExample {
     public static String timestamp() {
         return Datetime.now().format('yyyy-MM-dd\'T\'HH:mm:ss'); // relies on current datetime provided by System.Datetime
     }
-    
+
     public static String testableTimestamp() {
         return Instant.now().format('yyyy-MM-dd\'T\'HH:mm:ss'); // defaults to current datetime, but can be overriden in test
     }
@@ -62,7 +62,7 @@ public class TemporalExampleTest {
     public static void testTimestamp() {
         String timestamp = TemporalExample.timestamp(); // output is untestable
     }
-    
+
     @IsTest
     public static void testTestableTimestamp() {
         Datetime mockDatetime = Datetime.newInstance(2000, 1, 15, 10, 30, 59);
@@ -87,3 +87,4 @@ public class TemporalExampleTest {
 | `Object` | `get()` | Returns a value if it’s present. Throws a `LambdaException` otherwise |
 | `Boolean` | `isPresent()` | Returns whether the value is present.
 | `Object` | `orElse(Object other)` | Returns the value if it’s present, and provided `other` otherwise |
+| `Object` | `orElseThrow(Exception providedException)` | Returns the value if it’s present, and throws `providedException` otherwise |
