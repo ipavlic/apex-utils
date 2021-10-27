@@ -39,6 +39,17 @@ public class Optional {
 	}
 
 	/**
+	 * Returns the wrapped value if it is present, and throws provided Exception if it is not.
+	 */
+	public Object orElseThrow(Exception providedException) {
+		if (value != null) {
+			return value;
+		} else {
+			throw providedException;
+		}
+	}
+
+	/**
 	 * Returns an empty Optional, which is a single instance in a transaction.
 	 */
 	public static Optional empty() {
