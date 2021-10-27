@@ -42,4 +42,16 @@ private class OptionalTest {
 		Object result = o.orElse('other');
 		System.assertEquals('other', result);
 	}
+
+	@IsTest
+	public static void testOrElseThrow() {
+		Optional o = Optional.empty();
+		Exception myException = new AuraHandledException('exceptionText');
+		try {
+			Object result = o.orElseThrow(myException);
+			System.assert(false);
+		} catch (AuraHandledException ex) {
+			System.assertEquals(myException, ex);
+		}
+	}
 }
